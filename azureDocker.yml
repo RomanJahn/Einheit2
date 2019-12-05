@@ -51,6 +51,6 @@ stages:
 
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(System.DefaultWorkingDirectory)'
         artifact: 'deployment.yml'
         publishLocation: 'pipeline'
