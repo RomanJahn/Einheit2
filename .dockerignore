@@ -1,0 +1,7 @@
+node_modules
+npm-dub.log
+test
+readme.txt
+dockerize.yml
+deployment.yml
+dockerfile
