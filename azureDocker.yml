@@ -49,8 +49,11 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: 'latest'
 
-    - task: PublishPipelineArtifact@1
+    - task: KubernetesManifest@0
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)'
-        artifact: 'deployment.yml'
-        publishLocation: 'pipeline'
+        action: 'deploy'
+        kubernetesServiceConnection: 'Kubernetes'
+        namespace: 'default'
+        manifests: 'deployment.yml'
+
+      
