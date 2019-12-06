@@ -35,5 +35,5 @@ spec:
       - image: romanjahn/nodeapp
         name: nodeapp
         ports:
-        - containerPort: 3000
+        - containerPort: 80
           name: nodeapp
