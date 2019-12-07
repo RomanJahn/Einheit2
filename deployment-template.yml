@@ -32,7 +32,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: romanjahn/nodeapp:latest
+      - image: romanjahn/nodeapp:${TAG}
         name: nodeapp
         ports:
         - containerPort: 80

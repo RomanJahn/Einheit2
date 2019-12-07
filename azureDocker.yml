@@ -25,11 +25,18 @@ stages:
   displayName: Build stage
   jobs:  
   - job: Build
+    variables:
+    - name: TAG
+      value: $(Build.BuildId)
     displayName: Build
     pool:
       vmImage: $(vmImageName)
       
     steps:
+    - script: |
+        envsubst '${TAG}' < deployment-template.yml > deployment.yml
+      displayName: Replace environment variables
+    
     - task: NodeTool@0
       inputs:
         versionSpec: '10.x'
@@ -47,14 +54,14 @@ stages:
         repository: 'romanjahn/nodeapp'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: 'latest'
+        tags: $(Build.BuildId)
 
-    - task: KubernetesManifest@0
-      inputs:
-        action: 'deploy'
-        kubernetesServiceConnection: 'Kubernetes'
-        namespace: 'default'
-        manifests: 'deployment.yml'
+    #- task: KubernetesManifest@0
+    #  inputs:
+    #    action: 'deploy'
+    #    kubernetesServiceConnection: 'Kubernetes'
+    #    namespace: 'default'
+    #    manifests: 'deployment.yml'
 
     - task: PublishPipelineArtifact@1
       inputs:
