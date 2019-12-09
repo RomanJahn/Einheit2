@@ -9,4 +9,8 @@ Every push to this repo triggers a build and release pipeline in Azure.
 The build pipeline (azureDocker.yml) creates a docker image and pushes it to dockerhub.
 Then a release of this node-app is deployed to Azure Kubernetes (deployment.yml).
 
+During the process of building, the file deployment-template.yml gets changed into a file
+named deployment.yml containing the current docker image tag.
+
+
  
